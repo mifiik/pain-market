@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class ProductService {
     private final ProductRepository productRepository;
 
-    public Product create(Product product) {
-        return productRepository.create(product);
+    public void create(Product product) {
+         productRepository.create(product);
     }
 }
