@@ -14,7 +14,7 @@ public class ProductController {
     private final ProductService productService;
 
     @PostMapping
-    public Product create(@RequestBody Product product) {
-        return productService.create(product);
+    public void create(@RequestBody Product product) {
+         productService.create(product);
     }
 }
