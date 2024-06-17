@@ -2,9 +2,9 @@ CREATE SEQUENCE products_sequence;
 
 CREATE TABLE products
 (
-    id       BIGINT DEFAULT nextval('products_sequence') NOT NULL PRIMARY KEY,
-    name     VARCHAR(255),
-    price    FLOAT CHECK (price >= 0),
+    id       BIGINT DEFAULT nextval('products_sequence')       NOT NULL PRIMARY KEY,
+    name     VARCHAR(255)                                      NOT NULL,
+    price    FLOAT CHECK (price >= 0)                          NOT NULL,
     discount INTEGER CHECK (discount >= 0 AND discount <= 100) NOT NULL
 );
 
@@ -20,7 +20,7 @@ CREATE SEQUENCE customers_sequence;
 CREATE TABLE customers
 (
     id    BIGINT DEFAULT nextval('customers_sequence') NOT NULL PRIMARY KEY,
-    email VARCHAR(125)
+    email VARCHAR(125)                                 NOT NULL
 );
 
 INSERT INTO customers (email)
@@ -35,9 +35,9 @@ CREATE SEQUENCE orders_sequence;
 CREATE TABLE orders
 (
     id         BIGINT DEFAULT nextval('orders_sequence') NOT NULL PRIMARY KEY,
-    product_id BIGINT REFERENCES products (id) NOT NULL,
-    client_id  BIGINT REFERENCES customers (id) NOT NULL,
-    price      FLOAT
+    product_id BIGINT REFERENCES products (id)           NOT NULL,
+    client_id  BIGINT REFERENCES customers (id)          NOT NULL,
+    price      FLOAT CHECK (price >= 0)                  NOT NULL
 );
 
 INSERT INTO orders (product_id, client_id, price)
@@ -52,9 +52,9 @@ CREATE SEQUENCE deliveries_sequence;
 CREATE TABLE deliveries
 (
     id          BIGINT DEFAULT nextval('deliveries_sequence') NOT NULL PRIMARY KEY,
-    order_id    BIGINT REFERENCES orders (id) NOT NULL,
-    customer_id BIGINT REFERENCES customers (id) NOT NULL,
-    address     VARCHAR(255)
+    order_id    BIGINT REFERENCES orders (id)                 NOT NULL,
+    customer_id BIGINT REFERENCES customers (id)              NOT NULL,
+    address     VARCHAR(255)                                  NOT NULL
 );
 
 INSERT INTO deliveries (order_id, customer_id, address)
