@@ -15,8 +15,8 @@ public class DeliveryRepository {
 
     public void create(Delivery delivery) {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
-        parameterSource.addValue("order_id", delivery.getOrder_id());
-        parameterSource.addValue("customer_id", delivery.getCustomer_id());
+        parameterSource.addValue("order_id", delivery.getOrderId());
+        parameterSource.addValue("customer_id", delivery.getCustomerId());
         parameterSource.addValue("address", delivery.getAddress());
 
         jdbcTemplate.update(sqlInsert, parameterSource);
