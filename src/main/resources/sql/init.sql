@@ -3,8 +3,8 @@ CREATE SEQUENCE products_sequence;
 CREATE TABLE products
 (
     id       BIGINT DEFAULT nextval('products_sequence') NOT NULL PRIMARY KEY,
-    name     VARCHAR(255) NOT NULL,
-    price    FLOAT CHECK (price > 0) NOT NULL,
+    name     VARCHAR(255),
+    price    FLOAT CHECK (price >= 0),
     discount INTEGER CHECK (discount >= 0 AND discount <= 100) NOT NULL
 );
 
@@ -20,7 +20,7 @@ CREATE SEQUENCE customers_sequence;
 CREATE TABLE customers
 (
     id    BIGINT DEFAULT nextval('customers_sequence') NOT NULL PRIMARY KEY,
-    email VARCHAR(125) NOT NULL
+    email VARCHAR(125)
 );
 
 INSERT INTO customers (email)
