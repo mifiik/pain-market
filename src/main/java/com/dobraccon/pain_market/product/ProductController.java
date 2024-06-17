@@ -2,10 +2,7 @@ package com.dobraccon.pain_market.product;
 
 
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
@@ -15,6 +12,11 @@ public class ProductController {
 
     @PostMapping
     public void create(@RequestBody Product product) {
-         productService.create(product);
+        productService.create(product);
+    }
+
+    @GetMapping("/{id}")
+    public Product getById(@PathVariable Long id) {
+        return productService.getById(id);
     }
 }

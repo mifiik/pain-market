@@ -12,4 +12,8 @@ public class CustomerService {
     public void create(Customer customer) {
         customerRepository.create(customer);
     }
+
+    public Customer getById(long id){
+        return customerRepository.getById(id);
+    }
 }

@@ -4,7 +4,7 @@ CREATE TABLE products
 (
     id       BIGINT DEFAULT nextval('products_sequence')       NOT NULL PRIMARY KEY,
     name     VARCHAR(255)                                      NOT NULL,
-    price    FLOAT CHECK (price > 0)                           NOT NULL,
+    price    FLOAT CHECK (price >= 0)                          NOT NULL,
     discount INTEGER CHECK (discount >= 0 AND discount <= 100) NOT NULL
 );
 
@@ -37,7 +37,7 @@ CREATE TABLE orders
     id         BIGINT DEFAULT nextval('orders_sequence') NOT NULL PRIMARY KEY,
     product_id BIGINT REFERENCES products (id)           NOT NULL,
     client_id  BIGINT REFERENCES customers (id)          NOT NULL,
-    price      FLOAT                                     NOT NULL
+    price      FLOAT CHECK (price >= 0)                  NOT NULL
 );
 
 INSERT INTO orders (product_id, client_id, price)

@@ -10,8 +10,10 @@ import org.springframework.stereotype.Repository;
 @AllArgsConstructor
 public class ProductRepository {
     private final NamedParameterJdbcTemplate jdbcTemplate;
+    private final ProductRowMapper productRowMapper;
 
     private static final String sqlInsert = "INSERT INTO products(name,price,discount)VALUES(:name,:price,:discount)";
+    private static final String sqlGetById = "SELECT * FROM products WHERE id = :productId";
 
     public void create(Product product) {
         MapSqlParameterSource params = new MapSqlParameterSource();
@@ -20,6 +22,12 @@ public class ProductRepository {
         params.addValue("discount", product.getDiscount());
 
         jdbcTemplate.update(sqlInsert, params);
+    }
 
+    public Product getById(long id) {
+        return jdbcTemplate.queryForObject(
+                sqlGetById,
+                new MapSqlParameterSource().addValue("productId", id),
+                productRowMapper);
     }
 }

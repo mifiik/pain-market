@@ -2,10 +2,7 @@ package com.dobraccon.pain_market.customer;
 
 
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -17,5 +14,10 @@ public class CustomerController {
     @PostMapping
     public void create(@RequestBody Customer customer) {
         customerService.create(customer);
+    }
+
+    @GetMapping("/{id}")
+    public Customer getById(@PathVariable Long id) {
+        return customerService.getById(id);
     }
 }
