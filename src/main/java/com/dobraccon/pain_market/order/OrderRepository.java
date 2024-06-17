@@ -9,9 +9,11 @@ import org.springframework.stereotype.Repository;
 @AllArgsConstructor
 public class OrderRepository {
     private final NamedParameterJdbcTemplate jdbcTemplate;
+    private final OrderRowMapper orderRowMapper;
 
     private static final String sqlInsert = "INSERT INTO orders(product_id, client_id, price)\n" +
             "VALUES (:productId, :clientId, :price);";
+    private static final String sqlGetById = "SELECT * FROM orders WHERE id = :orderId";
 
     public void create(Order order) {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
@@ -20,5 +22,12 @@ public class OrderRepository {
         parameterSource.addValue("price", order.getPrice());
 
         jdbcTemplate.update(sqlInsert, parameterSource);
+    }
+
+    public Order getById(long id) {
+        return jdbcTemplate.queryForObject(
+                sqlGetById,
+                new MapSqlParameterSource().addValue("orderId", id),
+                orderRowMapper);
     }
 }

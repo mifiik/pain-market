@@ -9,9 +9,12 @@ import org.springframework.stereotype.Repository;
 @AllArgsConstructor
 public class DeliveryRepository {
     private final NamedParameterJdbcTemplate jdbcTemplate;
+    private final DeliveryRowMapper deliveryRowMapper;
 
     private static final String sqlInsert = "INSERT INTO deliveries(order_id, customer_id, address)" +
             "VALUES(:order_id,:customer_id,:address)";
+
+    private static final String sqlGetById = "SELECT * FROM deliveries WHERE id=:deliveryId";
 
     public void create(Delivery delivery) {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
@@ -20,6 +23,13 @@ public class DeliveryRepository {
         parameterSource.addValue("address", delivery.getAddress());
 
         jdbcTemplate.update(sqlInsert, parameterSource);
+    }
+
+    public Delivery getById(long id) {
+        return jdbcTemplate.queryForObject(
+                sqlGetById,
+                new MapSqlParameterSource().addValue("deliveryId", id),
+                deliveryRowMapper);
     }
 }
 
