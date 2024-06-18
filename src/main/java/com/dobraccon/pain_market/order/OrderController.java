@@ -18,4 +18,19 @@ public class OrderController {
     public Order getById(@PathVariable Long id) {
         return orderService.getById(id);
     }
+
+    @DeleteMapping("/{orderId}")
+    public void deleteByOrderId(@PathVariable Long orderId) {
+        orderService.deleteByOrderId(orderId);
+    }
+
+    @DeleteMapping("/by-price/{orderPrice}")
+    public void deleteByPrice(@PathVariable float orderPrice) {
+        orderService.deleteByPrice(orderPrice);
+    }
+
+    @DeleteMapping("/by-client-id/{clientId}")
+    public void deleteByClientId(@PathVariable Long clientId) {
+        orderService.deleteByClientId(clientId);
+    }
 }

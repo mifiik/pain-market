@@ -15,6 +15,8 @@ public class CustomerRepository {
 
     private static final String sqlInsert = "INSERT INTO customers(email) VALUES(:email)";
     private static final String sqlGetById = "SELECT * FROM customers WHERE id = :customerId";
+    private static final String sqlDeleteById = "DELETE FROM customers WHERE id = :customerId";
+    private static final String sqlDeleteByEmail = "DELETE FROM customers WHERE email = :customerEmail";
 
     public void create(Customer customer) {
         MapSqlParameterSource params = new MapSqlParameterSource();
@@ -27,5 +29,15 @@ public class CustomerRepository {
         return jdbcTemplate.queryForObject(sqlGetById,
                 new MapSqlParameterSource().addValue("customerId", id),
                 customerRowMapper);
+    }
+
+    public void deleteById(long customerId) {
+        jdbcTemplate.update(sqlDeleteById,
+                new MapSqlParameterSource("customerId", customerId));
+    }
+
+    public void deleteByEmail(String customerEmail) {
+        jdbcTemplate.update(sqlDeleteByEmail,
+                new MapSqlParameterSource().addValue("customerEmail", customerEmail));
     }
 }

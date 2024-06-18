@@ -15,4 +15,16 @@ public class DeliveryService {
     public Delivery getById(long id) {
         return deliveryRepository.getById(id);
     }
+
+    public void deleteByDeliveryId(long deliveryId) {
+        deliveryRepository.deleteByDeliveryId(deliveryId);
+    }
+
+    public void deleteByAddress(String deliveryAddress) {
+        deliveryRepository.deleteByAddress(deliveryAddress);
+    }
+
+    public void deleteByOrderIdAndCustomerId(long orderId, long customerId) {
+        deliveryRepository.deleteByOrderIdAndCustomerId(orderId, customerId);
+    }
 }

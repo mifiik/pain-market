@@ -11,9 +11,12 @@ public class OrderRepository {
     private final NamedParameterJdbcTemplate jdbcTemplate;
     private final OrderRowMapper orderRowMapper;
 
-    private static final String sqlInsert = "INSERT INTO orders(product_id, client_id, price)\n" +
-            "VALUES (:productId, :clientId, :price);";
+    private static final String sqlInsert = "INSERT INTO orders(product_id, client_id, price)\n" + "VALUES " +
+            "(:productId, :clientId, :price);";
     private static final String sqlGetById = "SELECT * FROM orders WHERE id = :orderId";
+    private static final String sqlDeleteByPrice = "DELETE FROM orders WHERE price = :orderPrice";
+    private static final String sqlDeleteByClientId = "DELETE FROM orders WHERE client_id = :clientId";
+    private static final String sqlDeleteByOrderId = "DELETE FROM orders WHERE id = :orderId";
 
     public void create(Order order) {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
@@ -25,9 +28,21 @@ public class OrderRepository {
     }
 
     public Order getById(long id) {
-        return jdbcTemplate.queryForObject(
-                sqlGetById,
-                new MapSqlParameterSource().addValue("orderId", id),
+        return jdbcTemplate.queryForObject(sqlGetById, new MapSqlParameterSource().addValue("orderId", id),
                 orderRowMapper);
+    }
+
+    public void deleteByOrderId(long orderId) {
+        jdbcTemplate.update(sqlDeleteByOrderId,
+                new MapSqlParameterSource().addValue("orderId", orderId));
+    }
+
+    public void deleteByPrice(float orderPrice) {
+        jdbcTemplate.update(sqlDeleteByPrice, new MapSqlParameterSource().addValue("orderPrice", orderPrice));
+    }
+
+    public void deleteByClientId(long clientId) {
+        jdbcTemplate.update(sqlDeleteByClientId,
+                new MapSqlParameterSource().addValue("clientId", clientId));
     }
 }

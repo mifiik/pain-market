@@ -20,4 +20,14 @@ public class CustomerController {
     public Customer getById(@PathVariable Long id) {
         return customerService.getById(id);
     }
+
+    @DeleteMapping("/{customerId}")
+    public void deleteById(@PathVariable Long customerId) {
+        customerService.deleteById(customerId);
+    }
+
+    @DeleteMapping("/by-email/{customerEmail}")
+    public void deleteByEmail(@PathVariable String customerEmail) {
+        customerService.deleteByEmail(customerEmail);
+    }
 }

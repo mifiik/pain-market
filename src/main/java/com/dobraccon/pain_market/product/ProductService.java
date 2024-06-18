@@ -16,4 +16,16 @@ public class ProductService {
     public Product getById(long id) {
         return productRepository.getById(id);
     }
+
+    public void deleteById(long productId) {
+        productRepository.deleteById(productId);
+    }
+
+    public void deleteByName(String productName){
+        productRepository.deleteByName(productName);
+    }
+
+    public void deleteByDiscount(int productDiscount){
+        productRepository.deleteByDiscount(productDiscount);
+    }
 }
