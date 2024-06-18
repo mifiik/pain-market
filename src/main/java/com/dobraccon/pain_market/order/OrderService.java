@@ -16,4 +16,16 @@ public class OrderService {
     public Order getById(long id) {
         return orderRepository.getById(id);
     }
+
+    public void deleteByOrderId(long orderId) {
+        orderRepository.deleteByOrderId(orderId);
+    }
+
+    public void deleteByPrice(float orderPrice) {
+        orderRepository.deleteByPrice(orderPrice);
+    }
+
+    public void deleteByClientId(long clientId) {
+        orderRepository.deleteByClientId(clientId);
+    }
 }

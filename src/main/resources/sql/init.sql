@@ -63,3 +63,11 @@ VALUES (1, 1, 'address 1'),
        (3, 3, 'address 3'),
        (4, 4, 'address 4'),
        (5, 5, 'address 5');
+
+
+SELECT *
+FROM deliveries;
+
+DELETE FROM customers WHERE id = 1;
+DELETE FROM customers WHERE email = 'testEmail1';
+

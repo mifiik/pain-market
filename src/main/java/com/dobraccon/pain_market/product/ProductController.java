@@ -19,4 +19,19 @@ public class ProductController {
     public Product getById(@PathVariable Long id) {
         return productService.getById(id);
     }
+
+    @DeleteMapping("/delete-by-product-id/{productId}")
+    public void deleteById(@PathVariable Long productId) {
+        productService.deleteById(productId);
+    }
+
+    @DeleteMapping("/delete-by-product-name/{productName}")
+    public void deleteByName(@PathVariable String productName) {
+        productService.deleteByName(productName);
+    }
+
+    @DeleteMapping("/delete-by-product-discount/{productDiscount}")
+    public void deleteByDiscount(@PathVariable int productDiscount) {
+        productService.deleteByDiscount(productDiscount);
+    }
 }

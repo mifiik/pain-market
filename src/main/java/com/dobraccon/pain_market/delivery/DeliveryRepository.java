@@ -13,8 +13,11 @@ public class DeliveryRepository {
 
     private static final String sqlInsert = "INSERT INTO deliveries(order_id, customer_id, address)" +
             "VALUES(:order_id,:customer_id,:address)";
-
     private static final String sqlGetById = "SELECT * FROM deliveries WHERE id=:deliveryId";
+    private static final String sqlDeleteByAddress = "DELETE FROM deliveries WHERE address = :deliveryAddress";
+    private static final String sqlDeleteByOrderIdAndCustomerId = "DELETE FROM deliveries WHERE order_id = :orderId " +
+            "AND customer_id = :customerId";
+    private static final String sqlDeleteByDeliveryId = "DELETE FROM deliveries WHERE id = :deliveryId";
 
     public void create(Delivery delivery) {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
@@ -30,6 +33,22 @@ public class DeliveryRepository {
                 sqlGetById,
                 new MapSqlParameterSource().addValue("deliveryId", id),
                 deliveryRowMapper);
+    }
+
+    public void deleteByDeliveryId(long deliveryId) {
+        jdbcTemplate.update(sqlDeleteByDeliveryId,
+                new MapSqlParameterSource().addValue("deliveryId", deliveryId));
+    }
+
+    public void deleteByAddress(String deliveryAddress) {
+        jdbcTemplate.update(sqlDeleteByAddress,
+                new MapSqlParameterSource().addValue("deliveryAddress", deliveryAddress));
+    }
+
+    public void deleteByOrderIdAndCustomerId(long orderId, long customerId) {
+        jdbcTemplate.update(sqlDeleteByOrderIdAndCustomerId,
+                new MapSqlParameterSource().addValue("orderId", orderId)
+                        .addValue("customerId", customerId));
     }
 }
 
