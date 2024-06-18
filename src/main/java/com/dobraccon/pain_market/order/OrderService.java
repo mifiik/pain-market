@@ -36,7 +36,7 @@ public class OrderService {
         orderRepository.deleteByClientId(clientId);
     }
 
-    public OrderWithDetails getByOrderId(long orderId) {
+    public OrderWithDetails getByOrderIdWithDetails(long orderId) {
         Order order = orderRepository.getById(orderId);
         Product orderProduct = productService.getById(order.getProductId());
         Customer orderCustomer = customerService.getById(order.getClientId());
