@@ -1,5 +1,6 @@
 package com.dobraccon.pain_market.order;
 
+import com.dobraccon.pain_market.order.details.OrderWithDetails;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,5 +33,10 @@ public class OrderController {
     @DeleteMapping("/by-client-id/{clientId}")
     public void deleteByClientId(@PathVariable Long clientId) {
         orderService.deleteByClientId(clientId);
+    }
+
+    @GetMapping("/by-order-id-with-detail/{orderId}")
+    public OrderWithDetails getByOrderId(@PathVariable long orderId) {
+        return orderService.getByOrderId(orderId);
     }
 }
