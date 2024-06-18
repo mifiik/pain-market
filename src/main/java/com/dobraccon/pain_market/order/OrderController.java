@@ -24,7 +24,7 @@ public class OrderController {
         orderService.deleteByOrderId(orderId);
     }
 
-    @DeleteMapping("/by-price-id/{orderPrice}")
+    @DeleteMapping("/by-price/{orderPrice}")
     public void deleteByPrice(@PathVariable float orderPrice) {
         orderService.deleteByPrice(orderPrice);
     }
