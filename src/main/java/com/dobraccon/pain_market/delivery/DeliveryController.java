@@ -21,17 +21,17 @@ public class DeliveryController {
         return deliveryService.getById(id);
     }
 
-    @DeleteMapping("/delete-by-delivery-id/{deliveryId}")
+    @DeleteMapping("/{deliveryId}")
     public void deleteByDeliveryId(@PathVariable Long deliveryId) {
         deliveryService.deleteByDeliveryId(deliveryId);
     }
 
-    @DeleteMapping("/delete-by-delivery-address/{deliveryAddress}")
+    @DeleteMapping("/by-address/{deliveryAddress}")
     public void deleteByAddress(@PathVariable String deliveryAddress) {
         deliveryService.deleteByAddress(deliveryAddress);
     }
 
-    @DeleteMapping("/delete-by-delivery-order-and-customer-id/{orderId}/{customerId}")
+    @DeleteMapping("/by-order-and-customer-id/{orderId}/{customerId}")
     public void deleteByOrderIdAndCustomerId(@PathVariable long orderId, @PathVariable long customerId) {
         deliveryService.deleteByOrderIdAndCustomerId(orderId, customerId);
     }

@@ -21,13 +21,13 @@ public class CustomerController {
         return customerService.getById(id);
     }
 
-    @DeleteMapping("/delete-by-customer-id/{customerId}")
-    public void deleteById(@PathVariable Long customerId){
+    @DeleteMapping("/{customerId}")
+    public void deleteById(@PathVariable Long customerId) {
         customerService.deleteById(customerId);
     }
 
-    @DeleteMapping("/delete-by-customer-email/{customerEmail}")
-    public void deleteByEmail(@PathVariable String customerEmail){
+    @DeleteMapping("/by-email/{customerEmail}")
+    public void deleteByEmail(@PathVariable String customerEmail) {
         customerService.deleteByEmail(customerEmail);
     }
 }
