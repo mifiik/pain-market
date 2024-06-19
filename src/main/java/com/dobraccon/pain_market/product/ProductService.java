@@ -21,11 +21,11 @@ public class ProductService {
         productRepository.deleteById(productId);
     }
 
-    public void deleteByName(String productName){
-        productRepository.deleteByName(productName);
+    public void deleteByDiscount(int productDiscount) {
+        productRepository.deleteByDiscount(productDiscount);
     }
 
-    public void deleteByDiscount(int productDiscount){
-        productRepository.deleteByDiscount(productDiscount);
+    public void update(Product product) {
+        productRepository.update(product);
     }
 }
