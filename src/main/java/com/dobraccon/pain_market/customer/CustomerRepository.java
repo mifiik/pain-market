@@ -1,11 +1,10 @@
 package com.dobraccon.pain_market.customer;
 
 
-import com.dobraccon.pain_market.product.ProductRowMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.stereotype.Repository;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 @Repository
 @AllArgsConstructor
@@ -15,6 +14,7 @@ public class CustomerRepository {
 
     private static final String sqlInsert = "INSERT INTO customers(email) VALUES(:email)";
     private static final String sqlGetById = "SELECT * FROM customers WHERE id = :customerId";
+    private static final String sqlLoadByEmail = "SELECT * FROM customers WHERE email = :customerEmail";
     private static final String sqlDeleteById = "DELETE FROM customers WHERE id = :customerId";
     private static final String sqlDeleteByEmail = "DELETE FROM customers WHERE email = :customerEmail";
 
@@ -28,6 +28,12 @@ public class CustomerRepository {
     public Customer getById(long id) {
         return jdbcTemplate.queryForObject(sqlGetById,
                 new MapSqlParameterSource().addValue("customerId", id),
+                customerRowMapper);
+    }
+
+    public Customer loadByEmail(String customerEmail) {
+        return jdbcTemplate.queryForObject(sqlLoadByEmail,
+                new MapSqlParameterSource().addValue("customerEmail", customerEmail),
                 customerRowMapper);
     }
 

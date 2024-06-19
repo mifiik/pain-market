@@ -17,11 +17,15 @@ public class CustomerService {
         return customerRepository.getById(id);
     }
 
+    public Customer loadByEmail(String customerEmail) {
+        return customerRepository.loadByEmail(customerEmail);
+    }
+
     public void deleteById(long customerId) {
         customerRepository.deleteById(customerId);
     }
 
-    public void deleteByEmail(String customerEmail){
+    public void deleteByEmail(String customerEmail) {
         customerRepository.deleteByEmail(customerEmail);
     }
 }

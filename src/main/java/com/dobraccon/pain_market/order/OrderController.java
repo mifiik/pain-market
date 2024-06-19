@@ -1,6 +1,7 @@
 package com.dobraccon.pain_market.order;
 
 import com.dobraccon.pain_market.order.details.OrderWithDetails;
+import com.dobraccon.pain_market.order.history.OrderHistoryDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,5 +39,10 @@ public class OrderController {
     @GetMapping("/by-order-id-with-detail/{orderId}")
     public OrderWithDetails getByOrderIdWithDetails(@PathVariable Long orderId) {
         return orderService.getByOrderIdWithDetails(orderId);
+    }
+
+    @GetMapping("/history-by-customer-id/{customerId}")
+    public OrderHistoryDTO getCustomerOrders(@PathVariable Long customerId) {
+        return orderService.getCustomerOrders(customerId);
     }
 }
