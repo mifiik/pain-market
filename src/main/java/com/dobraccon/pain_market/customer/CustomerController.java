@@ -21,6 +21,11 @@ public class CustomerController {
         return customerService.getById(id);
     }
 
+    @GetMapping("/by-customer-email/{customerEmail}")
+    public Customer loadByEmail(@PathVariable String customerEmail) {
+        return customerService.loadByEmail(customerEmail);
+    }
+
     @DeleteMapping("/{customerId}")
     public void deleteById(@PathVariable Long customerId) {
         customerService.deleteById(customerId);

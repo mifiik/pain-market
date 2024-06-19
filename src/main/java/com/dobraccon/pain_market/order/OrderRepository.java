@@ -5,6 +5,8 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @AllArgsConstructor
 public class OrderRepository {
@@ -17,6 +19,7 @@ public class OrderRepository {
     private static final String sqlDeleteByPrice = "DELETE FROM orders WHERE price = :orderPrice";
     private static final String sqlDeleteByClientId = "DELETE FROM orders WHERE client_id = :clientId";
     private static final String sqlDeleteByOrderId = "DELETE FROM orders WHERE id = :orderId";
+    private static final String sqlLoadByCustomerId = "SELECT * FROM orders WHERE client_id = :customerId";
 
     public void create(Order order) {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
@@ -44,5 +47,11 @@ public class OrderRepository {
     public void deleteByClientId(long clientId) {
         jdbcTemplate.update(sqlDeleteByClientId,
                 new MapSqlParameterSource().addValue("clientId", clientId));
+    }
+
+    public List<Order> getByCustomerId(long customerId) {
+        return jdbcTemplate.query(sqlLoadByCustomerId,
+                new MapSqlParameterSource("customerId", customerId),
+                orderRowMapper);
     }
 }
