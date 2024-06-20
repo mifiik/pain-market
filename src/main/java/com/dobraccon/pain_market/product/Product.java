@@ -23,6 +23,19 @@ public class Product {
         if (primaryPrice < 0 || currentPrice < 0 || discount < 0 || discount > 100) {
             throw new IllegalArgumentException("Invalid price or discount");
         }
+        if (minDeliveryDays < 0) {
+            throw new IllegalArgumentException("minDeliveryDays can't be negative");
+        }
+        if (maxDeliveryDays < 0) {
+            throw new IllegalArgumentException("maxDeliveryDays can't be negative");
+        }
+        if (maxDeliveryDays < minDeliveryDays) {
+            throw new IllegalArgumentException("maxDeliveryDays can't be less than minDeliveryDays");
+        }
+        if (rating < 0 || rating > 5) {
+            throw new IllegalArgumentException("rating must be between 0 and 5");
+        }
+
         this.id = id;
         this.primaryPrice = primaryPrice;
         this.currentPrice = currentPrice;

@@ -25,7 +25,4 @@ public class ProductService {
         productRepository.deleteByDiscount(productDiscount);
     }
 
-    public void update(Product product) {
-        productRepository.update(product);
-    }
 }

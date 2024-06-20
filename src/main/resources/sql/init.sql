@@ -9,9 +9,9 @@ CREATE TABLE products
     is_new            BOOLEAN                                           NOT NULL,
     image_url         VARCHAR(255)                                      NOT NULL,
     description       VARCHAR(255)                                      NOT NULL,
-    min_delivery_days INTEGER CHECK (min_delivery_days >= 0 ),
-    max_delivery_days INTEGER CHECK (max_delivery_days >= 0 ),
-    rating            FLOAT CHECK (rating >= 0 AND rating <= 5),
+    min_delivery_days INTEGER CHECK (min_delivery_days >= 0 )           NOT NULL,
+    max_delivery_days INTEGER CHECK (max_delivery_days >= 0 )           NOT NULL,
+    rating            FLOAT CHECK (rating >= 0 AND rating <= 5)         NOT NULL,
     review_count      INTEGER                                           NOT NULL
 );
 

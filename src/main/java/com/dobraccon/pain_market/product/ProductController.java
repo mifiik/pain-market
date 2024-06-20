@@ -30,8 +30,4 @@ public class ProductController {
         productService.deleteByDiscount(productDiscount);
     }
 
-    @PutMapping
-    public void update(@RequestBody Product product) {
-        productService.update(product);
-    }
 }
