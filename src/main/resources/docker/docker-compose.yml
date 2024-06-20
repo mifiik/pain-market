@@ -1,9 +1,11 @@
-version: "3.8"
+version: "3.9"
 services:
   pain-db:
-    image: postgres:10.5
+    image: postgres
     restart: always
     container_name: pain-db
+    environment:
+      POSTGRES_PASSWORD: postgres
     ports:
       - "5432:5432"
     networks:
