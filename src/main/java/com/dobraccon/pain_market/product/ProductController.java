@@ -25,13 +25,9 @@ public class ProductController {
         productService.deleteById(productId);
     }
 
-    @DeleteMapping("/by-product-name/{productName}")
-    public void deleteByName(@PathVariable String productName) {
-        productService.deleteByName(productName);
-    }
-
     @DeleteMapping("/by-product-discount/{productDiscount}")
     public void deleteByDiscount(@PathVariable int productDiscount) {
         productService.deleteByDiscount(productDiscount);
     }
+
 }
