@@ -12,15 +12,15 @@ public class CustomerRowMapper implements RowMapper<Customer> {
         return new Customer(
                 resultSet.getLong("id"),
                 resultSet.getString("image_url"),
-                resultSet.getBoolean("law_entity"),
+                resultSet.getBoolean("legal_entity"),
                 resultSet.getString("email"),
-                resultSet.getInt("phone_number"),
+                resultSet.getString("phone_number"),
                 resultSet.getString("first_name"),
                 resultSet.getString("last_name"),
                 resultSet.getString("password"),
                 resultSet.getString("city"),
                 resultSet.getString("street"),
-                resultSet.getInt("city_index")
+                resultSet.getString("city_index")
         );
     }
 }

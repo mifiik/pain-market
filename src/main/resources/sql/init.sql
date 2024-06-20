@@ -20,8 +20,8 @@ CREATE SEQUENCE customers_sequence;
 CREATE TABLE customers
 (
     id           BIGINT DEFAULT nextval('customers_sequence') NOT NULL PRIMARY KEY,
-    image_url    VARCHAR(255)                                 NOT NULL,
-    law_entity   BOOLEAN                                      NOT NULL,
+    image_url    VARCHAR(255),
+    legal_entity BOOLEAN                                      NOT NULL,
     email        VARCHAR(125)                                 NOT NULL,
     phone_number INTEGER CHECK (phone_number > 0)             NOT NULL,
     first_name   VARCHAR(125)                                 NOT NULL,
@@ -29,10 +29,10 @@ CREATE TABLE customers
     password     VARCHAR(125)                                 NOT NULL,
     city         VARCHAR(125)                                 NOT NULL,
     street       VARCHAR(125)                                 NOT NULL,
-    city_index   INTEGER CHECK (city_index > 0)               NOT NULL
+    city_index   VARCHAR(125)                                 NOT NULL
 );
 
-INSERT INTO customers (image_url, law_entity, email, phone_number, first_name, last_name, password, city, street,
+INSERT INTO customers (image_url, legal_entity, email, phone_number, first_name, last_name, password, city, street,
                        city_index)
 VALUES ('example.com/image1.jpg', false, 'testEmail1@example.com', 1234567890, 'John', 'Doe', 'password123', 'New York',
         '123 Elm St', 10001),
