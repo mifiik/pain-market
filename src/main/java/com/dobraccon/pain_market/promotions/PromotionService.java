@@ -15,8 +15,8 @@ public class PromotionService {
         promotionRepository.create(promotion);
     }
 
-    public Promotion getById(long promotionsId) {
-        return promotionRepository.getById(promotionsId);
+    public Promotion getById(long id) {
+        return promotionRepository.getById(id);
     }
 
     public void deleteById(long promotionsId) {

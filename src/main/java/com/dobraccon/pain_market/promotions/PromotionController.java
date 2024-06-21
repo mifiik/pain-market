@@ -17,13 +17,13 @@ public class PromotionController {
         promotionService.create(promotion);
     }
 
-    @GetMapping("/{promotionsId}")
-    public Promotion getById(@PathVariable long promotionsId) {
-        return promotionService.getById(promotionsId);
+    @GetMapping("/{id}")
+    public Promotion getById(@PathVariable Long id) {
+        return promotionService.getById(id);
     }
 
-    @DeleteMapping("/by-id/{promotionsId}")
-    public void deleteById(@PathVariable long promotionsId) {
+    @DeleteMapping("{promotionsId}")
+    public void deleteById(@PathVariable Long promotionsId) {
         promotionService.deleteById(promotionsId);
     }
 
@@ -43,7 +43,7 @@ public class PromotionController {
     }
 
     @GetMapping("/products-by-promotionId/{promotionId}")
-    public List<Product> getProductsByPromotionId(@PathVariable long promotionId) {
+    public List<Product> getProductsByPromotionId(@PathVariable Long promotionId) {
         return promotionService.getProductsByPromotionId(promotionId);
     }
 }

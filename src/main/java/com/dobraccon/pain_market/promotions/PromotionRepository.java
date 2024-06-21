@@ -1,6 +1,7 @@
 package com.dobraccon.pain_market.promotions;
 
 import com.dobraccon.pain_market.product.Product;
+import com.dobraccon.pain_market.product.ProductRowMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -13,6 +14,7 @@ import java.util.List;
 public class PromotionRepository {
     private final NamedParameterJdbcTemplate jdbcTemplate;
     private final PromotionRowMapper promotionRowMapper;
+    private final ProductRowMapper productRowMapper;
 
     private static final String sqlInsertPromotion = "INSERT INTO promotions(image_url, promotion_name, " +
             "promotion_description," +
@@ -38,9 +40,9 @@ public class PromotionRepository {
         jdbcTemplate.update(sqlInsertPromotion, parameterSource);
     }
 
-    public Promotion getById(long promotionsId) {
+    public Promotion getById(long id) {
         return jdbcTemplate.queryForObject(sqlGetById,
-                new MapSqlParameterSource().addValue("promotionsId", promotionsId),
+                new MapSqlParameterSource().addValue("promotionsId", id),
                 promotionRowMapper);
     }
 
@@ -69,19 +71,7 @@ public class PromotionRepository {
     public List<Product> getProductsByPromotionId(long promotionId) {
         return jdbcTemplate.query(sqlGetProductsByPromotionId,
                 new MapSqlParameterSource("promotionId", promotionId),
-                (rs, rowNum) -> new Product(
-                        rs.getLong("id"),
-                        rs.getFloat("primary_price"),
-                        rs.getFloat("current_price"),
-                        rs.getInt("discount"),
-                        rs.getBoolean("is_new"),
-                        rs.getString("image_url"),
-                        rs.getString("description"),
-                        rs.getInt("min_delivery_days"),
-                        rs.getInt("max_delivery_days"),
-                        rs.getFloat("rating"),
-                        rs.getInt("review_count")
-                ));
+                productRowMapper);
     }
 }
 
