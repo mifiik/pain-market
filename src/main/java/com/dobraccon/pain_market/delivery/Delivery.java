@@ -9,5 +9,6 @@ public class Delivery {
     private Long id;
     private Long orderId;
     private Long customerId;
+    private Long statusId;
     private String address;
 }
