@@ -5,6 +5,8 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @AllArgsConstructor
 public class DeliveryRepository {
@@ -18,11 +20,13 @@ public class DeliveryRepository {
     private static final String sqlDeleteByOrderIdAndCustomerId = "DELETE FROM deliveries WHERE order_id = :orderId " +
             "AND customer_id = :customerId";
     private static final String sqlDeleteByDeliveryId = "DELETE FROM deliveries WHERE id = :deliveryId";
+    private static final String sqlGetByStatusId = "SELECT * FROM deliveries WHERE status_id =:statusId";
 
     public void create(Delivery delivery) {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("order_id", delivery.getOrderId());
         parameterSource.addValue("customer_id", delivery.getCustomerId());
+        parameterSource.addValue("status_id", delivery.getStatusId());
         parameterSource.addValue("address", delivery.getAddress());
 
         jdbcTemplate.update(sqlInsert, parameterSource);
@@ -49,6 +53,13 @@ public class DeliveryRepository {
         jdbcTemplate.update(sqlDeleteByOrderIdAndCustomerId,
                 new MapSqlParameterSource().addValue("orderId", orderId)
                         .addValue("customerId", customerId));
+    }
+
+    public List<Delivery> getByStatusId(long statusId) {
+        return jdbcTemplate.query(
+                sqlGetByStatusId,
+                new MapSqlParameterSource().addValue("statusId", statusId),
+                deliveryRowMapper);
     }
 }
 

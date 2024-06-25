@@ -13,6 +13,7 @@ public class DeliveryRowMapper implements RowMapper<Delivery> {
                 resultSet.getLong("id"),
                 resultSet.getLong("order_id"),
                 resultSet.getLong("customer_id"),
+                resultSet.getLong("status_id"),
                 resultSet.getString("address")
         );
     }
