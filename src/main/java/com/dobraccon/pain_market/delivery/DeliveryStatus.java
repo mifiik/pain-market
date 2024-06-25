@@ -1,13 +1,12 @@
 package com.dobraccon.pain_market.delivery;
 
+import lombok.Getter;
+
+@Getter
 public enum DeliveryStatus {
     CREATED(1),
     DELIVERY(2),
     COMPLETED(3);
-
-    public long getStatusId() {
-        return statusId;
-    }
 
     private long statusId;
 

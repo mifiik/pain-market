@@ -9,7 +9,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class DeliveryDTO {
-    private Long id;
+    private long id;
     private Order order;
     private Customer customer;
     private DeliveryStatus deliveryStatus;

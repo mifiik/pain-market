@@ -20,7 +20,7 @@ public class DeliveryRepository {
     private static final String sqlDeleteByOrderIdAndCustomerId = "DELETE FROM deliveries WHERE order_id = :orderId " +
             "AND customer_id = :customerId";
     private static final String sqlDeleteByDeliveryId = "DELETE FROM deliveries WHERE id = :deliveryId";
-    private static final String sqlGetByStatusId = "SELECT * FROM deliveries WHERE id =:statusId";
+    private static final String sqlGetByStatusId = "SELECT * FROM deliveries WHERE status_id =:statusId";
 
     public void create(Delivery delivery) {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
