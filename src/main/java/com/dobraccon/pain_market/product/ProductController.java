@@ -4,6 +4,8 @@ package com.dobraccon.pain_market.product;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
 @RequestMapping("product")
@@ -30,4 +32,18 @@ public class ProductController {
         productService.deleteByDiscount(productDiscount);
     }
 
+    @GetMapping("/get-by-category-id/{categoriesId}")
+    public List<Product> getByCategoriesId(@PathVariable long categoriesId) {
+        return productService.getByCategoriesId(categoriesId);
+    }
+
+    @GetMapping("/get-by-groups-categories-id/{groupId}")
+    public List<Product> getByGroupsCategoriesId(@PathVariable long groupId) {
+        return productService.getByGroupsCategoriesId(groupId);
+    }
+
+    @GetMapping("/get-by-catalog-id/{catalogId}")
+    public List<Product> getByCatalogId(@PathVariable long catalogId) {
+        return productService.getByCatalogId(catalogId);
+    }
 }
