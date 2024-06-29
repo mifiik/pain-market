@@ -25,7 +25,7 @@ public class ProductRepository {
             "FROM products p\n" +
             "         JOIN xref_products_2_categories pc ON p.id = pc.products_id\n" +
             "WHERE pc.categories_id = :categoriesId;";
-    private static final String sqlGetByGroupsCategoriesId =
+    private static final String sqlGetByCategoryGroupId =
             "SELECT p.* " +
                     "FROM products p " +
                     "JOIN xref_products_2_categories_groups pcg ON p.id = pcg.product_id " +
@@ -77,8 +77,8 @@ public class ProductRepository {
                 new ProductRowMapper());
     }
 
-    public List<Product> getByGroupsCategoriesId(long groupId) {
-        return jdbcTemplate.query(sqlGetByGroupsCategoriesId,
+    public List<Product> getByCategoryGroupId(long groupId) {
+        return jdbcTemplate.query(sqlGetByCategoryGroupId,
                 new MapSqlParameterSource().addValue("groupId", groupId),
                 new ProductRowMapper());
     }

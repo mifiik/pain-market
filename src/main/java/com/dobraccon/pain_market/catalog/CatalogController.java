@@ -31,7 +31,7 @@ public class CatalogController {
         catalogService.deleteById(id);
     }
 
-    @GetMapping("/get-all")
+    @GetMapping()
     public List<Catalog> getAll() {
         return catalogService.getAll();
     }

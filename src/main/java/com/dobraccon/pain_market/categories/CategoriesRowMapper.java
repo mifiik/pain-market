@@ -11,7 +11,7 @@ public class CategoriesRowMapper implements RowMapper<Categories> {
     public Categories mapRow(ResultSet resultSet, int rowNum) throws SQLException {
         return new Categories(
                 resultSet.getLong("id"),
-                resultSet.getLong("categories_groups_id"),
+                resultSet.getLong("category_group_id"),
                 resultSet.getString("name")
         );
     }

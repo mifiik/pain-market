@@ -31,8 +31,8 @@ public class CategoriesGroupController {
         categoriesGroupService.deleteById(id);
     }
 
-    @GetMapping("/get-all-by-catalogId/{catalogId}")
-    public List<CategoriesGroups> getAllByCatalogId(@PathVariable long catalogId) {
+    @GetMapping("/by-catalog-id/{catalogId}")
+    public List<CategoriesGroups> getByCatalogId(@PathVariable long catalogId) {
         return categoriesGroupService.getAllByCatalogId(catalogId);
     }
 }

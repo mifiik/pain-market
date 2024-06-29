@@ -31,8 +31,8 @@ public class ProductService {
         return productRepository.getByCategoriesId(categoriesId);
     }
 
-    public List<Product> getByGroupsCategoriesId(long groupId) {
-        return productRepository.getByGroupsCategoriesId(groupId);
+    public List<Product> getByCategoryGroupId(long groupId) {
+        return productRepository.getByCategoryGroupId(groupId);
     }
 
     public List<Product> getByCatalogId(long catalogId) {

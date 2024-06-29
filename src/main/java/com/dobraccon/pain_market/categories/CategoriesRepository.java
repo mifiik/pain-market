@@ -13,25 +13,25 @@ public class CategoriesRepository {
     private final NamedParameterJdbcTemplate jdbcTemplate;
     private final CategoriesRowMapper categoriesRowMapper;
 
-    private static final String sqlCreate = "INSERT INTO categories(categories_groups_id, name) " +
+    private static final String sqlCreate = "INSERT INTO categories(category_group_id, name) " +
             "VALUES(:categoriesGroupsId, :name)";
     private static final String sqlGetById = "SELECT * FROM categories WHERE id=:categoriesId";
-    private static final String sqlUpdate = "UPDATE categories SET categories_groups_id=:categoriesGroupsId, " +
+    private static final String sqlUpdate = "UPDATE categories SET category_group_id=:categoriesGroupsId, " +
             "name=:name WHERE " +
             "id=:categoriesId";
     private static final String sqlDeleteById = "DELETE FROM categories WHERE id=:categoriesId";
     private static final String sqlGetByGroupId = "SELECT * FROM categories WHERE " +
-            "categories_groups_id=:categoriesGroupsId";
+            "category_group_id = :categoryGroupId";
     private static final String sqlGetByCatalogId = "SELECT c.*\n" +
             "FROM categories c\n" +
-            "         JOIN categories_groups cg ON c.categories_groups_id = cg.id\n" +
+            "         JOIN categories_groups cg ON c.category_group_id = cg.id\n" +
             "         JOIN catalogs ct ON cg.catalog_id = ct.id\n" +
             "WHERE c.id = :catalogId";
 
     public void create(Categories categories) {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("id", categories.getId());
-        parameterSource.addValue("categoriesGroupsId", categories.getCategoriesGroupsId());
+        parameterSource.addValue("categoriesGroupsId", categories.getCategoryGroupId());
         parameterSource.addValue("name", categories.getName());
 
         jdbcTemplate.update(sqlCreate, parameterSource);
@@ -48,7 +48,7 @@ public class CategoriesRepository {
         jdbcTemplate.update(sqlUpdate,
                 new MapSqlParameterSource()
                         .addValue("categoriesId", categories.getId())
-                        .addValue("categoriesGroupsId", categories.getCategoriesGroupsId())
+                        .addValue("categoriesGroupsId", categories.getCategoryGroupId())
                         .addValue("name", categories.getName())
         );
     }
@@ -58,9 +58,9 @@ public class CategoriesRepository {
                 new MapSqlParameterSource("categoriesId", id));
     }
 
-    public List<Categories> getByGroupId(long categoriesGroupsId) {
+    public List<Categories> getByGroupId(long categoryGroupId) {
         return jdbcTemplate.query(sqlGetByGroupId,
-                new MapSqlParameterSource("categoriesGroupsId", categoriesGroupsId),
+                new MapSqlParameterSource("categoryGroupId", categoryGroupId),
                 new CategoriesRowMapper());
     }
 

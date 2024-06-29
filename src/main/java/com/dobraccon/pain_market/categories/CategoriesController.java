@@ -31,12 +31,12 @@ public class CategoriesController {
         categoriesService.deleteById(id);
     }
 
-    @GetMapping("/get-by-category-group-id/{categoriesGroupsId}")
-    public List<Categories> getByGroupId(@PathVariable long categoriesGroupsId) {
-        return categoriesService.getByGroupId(categoriesGroupsId);
+    @GetMapping("/by-category-group-id/{categoryGroupId}")
+    public List<Categories> getByGroupId(@PathVariable long categoryGroupId) {
+        return categoriesService.getByGroupId(categoryGroupId);
     }
 
-    @GetMapping("/get-by-catalog-id/{catalogId}")
+    @GetMapping("/by-catalog-id/{catalogId}")
     public List<Categories> getByCatalogId(@PathVariable long catalogId) {
         return categoriesService.getByCatalogId(catalogId);
     }

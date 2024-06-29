@@ -38,8 +38,8 @@ public class ProductController {
     }
 
     @GetMapping("/get-by-groups-categories-id/{groupId}")
-    public List<Product> getByGroupsCategoriesId(@PathVariable long groupId) {
-        return productService.getByGroupsCategoriesId(groupId);
+    public List<Product> getByCategoryGroupId(@PathVariable long groupId) {
+        return productService.getByCategoryGroupId(groupId);
     }
 
     @GetMapping("/get-by-catalog-id/{catalogId}")

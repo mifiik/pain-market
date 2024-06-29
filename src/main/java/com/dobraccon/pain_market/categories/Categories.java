@@ -7,6 +7,6 @@ import lombok.Getter;
 @AllArgsConstructor
 class Categories {
     private Long id;
-    private long categoriesGroupsId;
+    private long categoryGroupId;
     private String name;
 }
