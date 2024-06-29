@@ -13,11 +13,11 @@ public class Brandrepository {
     private final NamedParameterJdbcTemplate jdbcTemplate;
     private final BrandRowMapper brandRowMapper;
 
-    private final static String sqlCreate = "INSERT INTO brands(image_url, name)VALUES(:imageUrl, :name)";
+    private final static String sqlCreate = "INSERT INTO brands(image_url, name) VALUES(:imageUrl, :name)";
     private final static String sqlGetById = "SELECT * FROM brands WHERE id =:id";
     private final static String sqlDeleteById = "DELETE FROM brands WHERE id =:brandId";
     private final static String sqlUpdate = "UPDATE brands SET image_url =:imageUrl, name =:name";
-    private final static String sqlGetByName = "SELECT * FROM brands WHERE LOWER(name) LIKE LOWER(:nameSymbol)";
+    private final static String sqlGetByNameLike = "SELECT * FROM brands WHERE LOWER(name) LIKE LOWER(:name)";
 
 
     public void create(Brand brand) {
@@ -35,8 +35,8 @@ public class Brandrepository {
     }
 
 
-    public void deleteById(long brandId) {
-        jdbcTemplate.update(sqlDeleteById, new MapSqlParameterSource().addValue("brandId", brandId));
+    public void deleteById(long id) {
+        jdbcTemplate.update(sqlDeleteById, new MapSqlParameterSource().addValue("brandId", id));
     }
 
     public void update(Brand brand) {
@@ -48,9 +48,9 @@ public class Brandrepository {
         );
     }
 
-    public List<Brand> getByName(String nameSymbol) {
-        return jdbcTemplate.query(sqlGetByName,
-                new MapSqlParameterSource("nameSymbol", nameSymbol),
+    public List<Brand> getByNameLike(String name) {
+        return jdbcTemplate.query(sqlGetByNameLike,
+                new MapSqlParameterSource("name", name),
                 brandRowMapper);
     }
 }

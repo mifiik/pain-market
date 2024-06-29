@@ -21,9 +21,9 @@ public class BrandController {
         return brandService.getById(id);
     }
 
-    @DeleteMapping("/{brandId}")
-    public void deleteById(@PathVariable Long brandId) {
-        brandService.deleteById(brandId);
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable Long id) {
+        brandService.deleteById(id);
     }
 
     @PutMapping
@@ -31,8 +31,8 @@ public class BrandController {
         brandService.update(brand);
     }
 
-    @GetMapping("/get-by-name/{nameSymbol}")
-    public List<Brand> getByName(@PathVariable String nameSymbol) {
-        return brandService.getByName(nameSymbol);
+    @GetMapping("/by-name-like/{name}")
+    public List<Brand> getByNameLike(@PathVariable String name) {
+        return brandService.getByNameLike(name);
     }
 }

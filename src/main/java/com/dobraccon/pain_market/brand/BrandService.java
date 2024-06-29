@@ -18,15 +18,15 @@ public class BrandService {
         return brandrepository.getById(id);
     }
 
-    public void deleteById(long brandId) {
-        brandrepository.deleteById(brandId);
+    public void deleteById(long id) {
+        brandrepository.deleteById(id);
     }
 
     public void update(Brand brand) {
         brandrepository.update(brand);
     }
 
-    public List<Brand> getByName(String nameSymbol) {
-        return brandrepository.getByName(nameSymbol);
+    public List<Brand> getByNameLike(String name) {
+        return brandrepository.getByNameLike(name);
     }
 }
