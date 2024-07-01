@@ -32,17 +32,17 @@ public class ProductController {
         productService.deleteByDiscount(productDiscount);
     }
 
-    @GetMapping("/get-by-category-id/{categoriesId}")
-    public List<Product> getByCategoriesId(@PathVariable long categoriesId) {
-        return productService.getByCategoriesId(categoriesId);
+    @GetMapping("/by-category-id/{categoryId}")
+    public List<Product> getByCategoryId(@PathVariable long categoryId) {
+        return productService.getByCategoryId(categoryId);
     }
 
-    @GetMapping("/get-by-groups-categories-id/{groupId}")
+    @GetMapping("/by-category-group-id/{groupId}")
     public List<Product> getByCategoryGroupId(@PathVariable long groupId) {
         return productService.getByCategoryGroupId(groupId);
     }
 
-    @GetMapping("/get-by-catalog-id/{catalogId}")
+    @GetMapping("/by-catalog-id/{catalogId}")
     public List<Product> getByCatalogId(@PathVariable long catalogId) {
         return productService.getByCatalogId(catalogId);
     }

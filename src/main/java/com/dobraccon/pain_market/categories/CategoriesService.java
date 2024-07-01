@@ -26,8 +26,8 @@ public class CategoriesService {
         categoriesRepository.deleteById(id);
     }
 
-    public List<Categories> getByGroupId(long categoryGroupId) {
-        return categoriesRepository.getByGroupId(categoryGroupId);
+    public List<Categories> getByCategoryGroupId(long categoryGroupId) {
+        return categoriesRepository.getByCategoryGroupId(categoryGroupId);
     }
 
     public List<Categories> getByCatalogId(long catalogId) {

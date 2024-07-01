@@ -27,8 +27,8 @@ public class ProductService {
         productRepository.deleteByDiscount(productDiscount);
     }
 
-    public List<Product> getByCategoriesId(long categoriesId) {
-        return productRepository.getByCategoriesId(categoriesId);
+    public List<Product> getByCategoryId(long categoryId) {
+        return productRepository.getByCategoryId(categoryId);
     }
 
     public List<Product> getByCategoryGroupId(long groupId) {

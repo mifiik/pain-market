@@ -22,9 +22,9 @@ public class PromotionController {
         return promotionService.getById(id);
     }
 
-    @DeleteMapping("{promotionsId}")
-    public void deleteById(@PathVariable Long promotionsId) {
-        promotionService.deleteById(promotionsId);
+    @DeleteMapping("{promotionId}")
+    public void deleteById(@PathVariable Long promotionId) {
+        promotionService.deleteById(promotionId);
     }
 
     @PostMapping("/add-products")

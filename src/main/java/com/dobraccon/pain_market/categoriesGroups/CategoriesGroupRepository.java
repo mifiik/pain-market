@@ -14,10 +14,10 @@ public class CategoriesGroupRepository {
     private final CategoriesGroupsRowMapper categoriesGroupsRowMapper;
 
     private static final String sqlCreate = "INSERT INTO categories_groups(catalog_id, name) VALUES(:catalogId,:name)";
-    private static final String sqlGetById = "SELECT * FROM categories_groups WHERE id=:categoriesGroupsId";
+    private static final String sqlGetById = "SELECT * FROM categories_groups WHERE id=:categoryGroupId";
     private static final String sqlUpdate = "UPDATE categories_groups SET catalog_id=:catalogId, name=:name WHERE " +
-            "id=:categoriesGroupsId";
-    private static final String sqlDeleteById = "DELETE FROM categories_groups WHERE id=:categoriesGroupsId";
+            "id=:categoryGroupId";
+    private static final String sqlDeleteById = "DELETE FROM categories_groups WHERE id=:categoryGroupId";
     private static final String sqlGetAllByCatalogId = "SELECT * FROM categories_groups WHERE catalog_id=:catalogId";
 
     public void create(CategoriesGroups categoriesGroups) {
@@ -32,14 +32,14 @@ public class CategoriesGroupRepository {
     public CategoriesGroups getById(long id) {
         return jdbcTemplate.queryForObject(sqlGetById,
                 new MapSqlParameterSource()
-                        .addValue("categoriesGroupsId", id),
+                        .addValue("categoryGroupId", id),
                 categoriesGroupsRowMapper);
     }
 
     public void update(CategoriesGroups categoriesGroups) {
         jdbcTemplate.update(sqlUpdate,
                 new MapSqlParameterSource()
-                        .addValue("categoriesGroupsId", categoriesGroups.getId())
+                        .addValue("categoryGroupId", categoriesGroups.getId())
                         .addValue("catalogId", categoriesGroups.getCatalogId())
                         .addValue("name", categoriesGroups.getName())
         );
@@ -48,7 +48,7 @@ public class CategoriesGroupRepository {
 
     public void deleteById(long id) {
         jdbcTemplate.update(sqlDeleteById,
-                new MapSqlParameterSource("categoriesGroupsId", id));
+                new MapSqlParameterSource("categoryGroupId", id));
     }
 
     public List<CategoriesGroups> getAllByCatalogId(long catalogId) {

@@ -21,21 +21,23 @@ public class ProductRepository {
     private static final String sqlGetById = "SELECT * FROM products WHERE id = :productId";
     private static final String sqlDeleteByDiscount = "DELETE FROM products WHERE discount = :productDiscount";
     private static final String sqlDeleteById = "DELETE FROM products WHERE id = :productId";
-    private static final String sqlGetByCategoriesId = "SELECT p.*\n" +
+    private static final String sqlGetByCategoryId = "SELECT p.*\n" +
             "FROM products p\n" +
-            "         JOIN xref_products_2_categories pc ON p.id = pc.products_id\n" +
-            "WHERE pc.categories_id = :categoriesId;";
-    private static final String sqlGetByCategoryGroupId =
-            "SELECT p.* " +
-                    "FROM products p " +
-                    "JOIN xref_products_2_categories_groups pcg ON p.id = pcg.product_id " +
-                    "JOIN categories_groups cg ON pcg.categories_groups_id = cg.id " +
-                    "WHERE cg.id = :groupId";
-    private static final String sqlGetByCatalogId = "select p.*\n" +
+            "JOIN xref_products_2_categories xpc ON p.id = xpc.product_id\n" +
+            "WHERE xpc.category_id = :categoryId;";
+    private static final String sqlGetByCategoryGroupId = "SELECT p.*\n" +
             "FROM products p\n" +
-            "         JOIN xref_products_2_catalogs xpc ON p.id = xpc.product_id\n" +
-            "         JOIN catalogs c ON xpc.product_id = c.id\n" +
-            "WHERE c.id = :catalogId";
+            "JOIN xref_products_2_categories xpc ON p.id = xpc.product_id\n" +
+            "JOIN categories c ON xpc.category_id = c.id\n" +
+            "JOIN categories_groups cg ON c.category_group_id = cg.id\n" +
+            "WHERE cg.id = :groupId;";
+    private static final String sqlGetByCatalogId = "SELECT p.*\n" +
+            "FROM products p\n" +
+            "JOIN xref_products_2_categories xpc ON p.id = xpc.product_id\n" +
+            "JOIN categories c ON xpc.category_id = c.id\n" +
+            "JOIN categories_groups cg ON c.category_group_id = cg.id\n" +
+            "JOIN catalogs ct ON cg.catalog_id = ct.id\n" +
+            "WHERE ct.id = :catalogId;";
 
     public void create(Product product) {
         MapSqlParameterSource params = new MapSqlParameterSource();
@@ -71,21 +73,21 @@ public class ProductRepository {
                 new MapSqlParameterSource().addValue("productDiscount", productDiscount));
     }
 
-    public List<Product> getByCategoriesId(long categoriesId) {
-        return jdbcTemplate.query(sqlGetByCategoriesId,
-                new MapSqlParameterSource().addValue("categoriesId", categoriesId),
-                new ProductRowMapper());
+    public List<Product> getByCategoryId(long categoryId) {
+        return jdbcTemplate.query(sqlGetByCategoryId,
+                new MapSqlParameterSource().addValue("categoryId", categoryId),
+                productRowMapper);
     }
 
     public List<Product> getByCategoryGroupId(long groupId) {
         return jdbcTemplate.query(sqlGetByCategoryGroupId,
                 new MapSqlParameterSource().addValue("groupId", groupId),
-                new ProductRowMapper());
+                productRowMapper);
     }
 
     public List<Product> getByCatalogId(long catalogId) {
         return jdbcTemplate.query(sqlGetByCatalogId,
                 new MapSqlParameterSource().addValue("catalogId", catalogId),
-                new ProductRowMapper());
+                productRowMapper);
     }
 }

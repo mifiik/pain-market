@@ -32,8 +32,8 @@ public class CategoriesController {
     }
 
     @GetMapping("/by-category-group-id/{categoryGroupId}")
-    public List<Categories> getByGroupId(@PathVariable long categoryGroupId) {
-        return categoriesService.getByGroupId(categoryGroupId);
+    public List<Categories> getByCategoryGroupId(@PathVariable long categoryGroupId) {
+        return categoriesService.getByCategoryGroupId(categoryGroupId);
     }
 
     @GetMapping("/by-catalog-id/{catalogId}")
