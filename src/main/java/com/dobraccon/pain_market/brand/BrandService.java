@@ -4,29 +4,32 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class BrandService {
-    private final Brandrepository brandrepository;
+    private final BrandRepository brandRepository;
 
     public void create(Brand brand) {
-        brandrepository.create(brand);
+        brandRepository.save(brand);
     }
 
     public Brand getById(long id) {
-        return brandrepository.getById(id);
+        Optional<Brand> brand = brandRepository.findById(id);
+        return brand.orElse(null);
     }
 
     public void deleteById(long id) {
-        brandrepository.deleteById(id);
+        brandRepository.deleteById(id);
     }
 
     public void update(Brand brand) {
-        brandrepository.update(brand);
+        brandRepository.save(brand);
     }
 
     public List<Brand> getByNameLike(String name) {
-        return brandrepository.getByNameLike(name);
+        return brandRepository.findByNameContainingIgnoreCase(name);
     }
 }
+
